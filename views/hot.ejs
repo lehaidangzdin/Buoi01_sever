@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title><%=title%></title>
+    <title><%= title %></title>
 
-    <%include item_include/header.ejs%>
+    <% include item_include/header.ejs %>
 
 </head>
 <body class="container">
 <!--    nav-->
-<%include item_include/nav.ejs%>
+<% include item_include/nav.ejs %>
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading" style="padding-top: 40px">Hot Image</h1>
-        <p class="lead text-muted" >Us list of most liked photos</p>
+        <p class="lead text-muted">Us list of most liked photos</p>
     </div>
 </section>
 <!-- Gallery -->
@@ -142,8 +142,34 @@
     </div>
 </div>
 <!-- Gallery -->
-<%include item_include/footer.ejs%>
+<!---->
+<div><%= diaChi %></div>
+<% for (var i = 0;i < mang.length;i++){ %>
+<div class="btn btn-primary"><%= mang[i] %></div>
 
+<% } %>
+<!---->
+<h2><%= sinhVien.name %></h2>
+<h2><%= sinhVien.sinhNhat %></h2>
+<h2><%= sinhVien.sdt %></h2>
+<div>==========</div>
+<!---->
+<% for (var i = 0;i < danhSach.length;i++){ %>
+    <p><%= danhSach[i].name %></p>
+    <p><%= danhSach[i].sinhNhat %></p>
+    <p><%= danhSach[i].sdt %></p>
+    <div>==========</div>
+<% } %>
+<div>=================================</div>
+<p><%= thongTin.name%></p>
+<p><%= thongTin.yeuThich%></p>
+<p>------</p>
+<!---->
+duLieu.title
+
+
+
+<% include item_include/footer.ejs %>
 
 </body>
 </html>
