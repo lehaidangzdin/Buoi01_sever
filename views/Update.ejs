@@ -11,7 +11,7 @@
 <form style="padding-bottom: 20px" method="post" action="/UpdateImage" enctype="application/x-www-form-urlencoded">
     <div class="mb-3">
         <label for="ten" class="form-label">ID Image: </label>
-        <input type="text" class="form-control" id="_id" name="idUpdate" disabled>
+        <input type="text" class="form-control" id="_id" name="_id">
     </div>
     <div class="mb-3">
         <label for="ten" class="form-label">Tên: </label>
@@ -37,6 +37,7 @@
     const txtLink = document.getElementById("linkAnh");
 
     const id = localStorage.getItem("_id");
+    console.log(id);
     const data = {id:id};
     (async () => {
         const rawResponse = await fetch('http://localhost:3000/Update', {

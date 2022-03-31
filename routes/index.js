@@ -228,7 +228,7 @@ router.post('/Update', function (req, res, next) {
     });// get data theo id
 });
 router.post('/UpdateImage', function (req, res, next) {
-    let id = req.body.idUpdate;
+    let id = req.body._id;
     let ten = req.body.ten;
     let noiDung = req.body.noiDung;
     let link = req.body.linkAnh;
