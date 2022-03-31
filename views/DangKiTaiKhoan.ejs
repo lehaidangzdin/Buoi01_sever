@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title><%= title%></title>
+
+    <% include item_include/header.ejs %>
+
+</head>
+<body class="container">
+<!--    nav-->
+<% include item_include/nav.ejs %>
+<!---->
+<form style="padding-bottom: 20px" method="post" action="/DangKi" enctype="multipart/form-data">
+    <div class="mb-3">
+        <input type="file" class="form-control" name="avatar" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div><%=message%></div>
+<!-- Gallery -->
+<% include item_include/footer.ejs %>
+</body>
+</html>
