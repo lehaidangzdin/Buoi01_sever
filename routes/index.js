@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 mongoose.connect(db).catch(error => {
     console.log("co loi xay ra" + error);
 });
-// upload file
+// ======================================upload file
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -16,13 +16,36 @@ var storage = multer.diskStorage({
         cb(null, Date.now() + "-" + file.originalname);
     },
 });
+// chỉ upload file jpg
+
 var upload = multer({
+    // giới hạn dung lượng file
     storage: storage,
     limits: {
-        fileSize: 1 * 1024,
+        fileSize: 2097152,
+        files: 5,
+    },
+    allowedFile: function (req, file, cb) {
+        // Accept images only
+        if (!file.originalname.match(/\.(jpg)$/)) {
+            req.fileValidationError = 'Chỉ tải được file .jqg!';
+            return cb(new Error('Chỉ tải được file .jqg!'), false);
+        }
+        cb(null, true);
     }
 }).single("avatar");
+//
+// router.post('/DangKi', upload.array('photos', 12), function(
+//     req,
+//     res,
+//     next
+// ) {
+//     // req.files là một mảng của các file `photos`
+//     // req.body sẽ giữ thông tin gắn kèm (vd: text fields), nếu có
+// });
 
+
+//
 
 router.post('/DangKi', function (req, res, next) {
     upload(req, res, function (err) {
@@ -43,8 +66,7 @@ router.get('/', function (req, res, next) {
 //
 router.get('/asia', function (req, res, next) {
     var stData = fs.readFileSync("myFile/data.txt").toString();
-    let data = JSON.parse(stData)
-    // console.log(data);
+    let data = JSON.parse(stData);
     res.render('Asian', {title: 'Asia', data: data});
 });
 //
@@ -140,7 +162,6 @@ router.post("/testForm", function (req, res) {
 //   const phoneNumber = req.body.soDienThoai;
 //   const add = req.body.Address;
 //
-//   console.log(name +" = "+phoneNumber +" = "+add);
 //
 //   const data = new Student({
 //     name: name,
@@ -162,7 +183,6 @@ router.post("/testForm", function (req, res) {
 //
 //   // get dulieu
 //   Student.find({},function (err,data){
-//     console.log(data);
 //     res.render('Form', { title: 'Form' , data:data,message:""});
 //   });// getall data
 // // xoa data
@@ -207,13 +227,21 @@ router.post("/AddImage", function (req, res) {
     res.render('Add', {title: 'Add', message: ""});
 });
 //getAll anh
-router.get('/List', function (req, res, next) {
+router.get('/List-Image', function (req, res, next) {
     anh.find({}, function (err, data) {
-        console.log(data);
         res.render('List', {title: 'List', data: data, message: ""});
     });// getall data
 });
-//
+
+// api getAllAnh
+router.get('/GetAllListImage', function (req, res, next) {
+    anh.find({}, function (err, data) {
+        // res.render('List', {title: 'List', data: data, message: ""});
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(data));
+    });// getall data
+});
+
 
 //chuyen sang man update, auto fill data
 router.post('/Update', function (req, res, next) {
@@ -222,7 +250,6 @@ router.post('/Update', function (req, res, next) {
         if (err == null) {
             res.send(data);
         } else {
-            console.log("1 ====" + data);
             res.render('Update', {title: 'Update', _data: data});
         }
     });// get data theo id
@@ -232,7 +259,6 @@ router.post('/UpdateImage', function (req, res, next) {
     let ten = req.body.ten;
     let noiDung = req.body.noiDung;
     let link = req.body.linkAnh;
-    console.log(id+"\n"+ten+"\n"+noiDung+"\n"+link);
     //
     anh.updateOne({_id: id}, {ten: ten, noiDung: noiDung, link: link}, function (err) {
         if (err == null) {

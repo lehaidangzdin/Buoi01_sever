@@ -9,10 +9,18 @@
 <body class="container">
 <!--    nav-->
 <% include item_include/nav.ejs %>
+<!--&lt;!&ndash;&ndash;&gt;-->
+<!--<form style="padding-bottom: 20px" method="post" action="/DangKi" enctype="multipart/form-data">-->
+<!--    <div class="mb-3">-->
+<!--        <input type="file" class="form-control" name="avatar" />-->
+<!--    </div>-->
+<!--    <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--</form>-->
 <!---->
-<form style="padding-bottom: 20px" method="post" action="/DangKi" enctype="multipart/form-data">
+<form style="padding-bottom: 20px" action="/DangKi" method="POST" enctype="multipart/form-data">
+    <label>Avatar</label>
     <div class="mb-3">
-        <input type="file" class="form-control" name="avatar" />
+        <input type="file"  class="form-control" name="avatar" multiple>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
