@@ -42,7 +42,7 @@
     const id = localStorage.getItem("_id");
     const data = {id:id};
     (async () => {
-        const rawResponse = await fetch('http://localhost:3000/Update', {
+        const rawResponse = await fetch('http://testbuoi1.herokuapp/Update', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
