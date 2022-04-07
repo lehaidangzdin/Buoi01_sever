@@ -1,215 +1,89 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title><%=title%></title>
-  <%include item_include/header.ejs%>
+    <title><%= title %></title>
+    <% include item_include/header.ejs %>
 </head>
 <body class="container">
 <!--nav-->
-<%include item_include/nav.ejs%>
-<%include item_include/sllide.ejs%>
+<% include item_include/nav.ejs %>
+<% include item_include/sllide.ejs %>
 
 <main role="main">
 
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1 class="jumbotron-heading" style="padding-top: 40px">Album</h1>
-      <p class="lead text-muted" >Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading" style="padding-top: 40px">Album</h1>
+            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
+                etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+        </div>
+    </section>
+
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <% for (var i = 0;i < data.length;i++){ %>
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="<%= data[i].link %>" alt="Card image cap"
+                             style="width: 100%;height:500px ">
+                        <div class="card-body">
+                            <p class="card-text text-capitalize text-nowrap " ><%= data[i].ten %></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/Update">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                onclick="updateImage(<%= JSON.stringify(data[i]._id) %>)">Sửa
+                                        </button>
+                                    </a>
+                                    <a>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" style="margin-left: 10px"
+                                                onclick="cofirmDelete(<%= JSON.stringify(data[i]._id) %>)">Xóa
+                                        </button>
+                                    </a></div>
+                                <small class="text-muted"><%= data[i].ngayThang%></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
     </div>
-  </section>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/35/78/6e53dc31dee3e84a162aa14155d7-1563109.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/d9/8e/6bd5e11ed1dfde50c7d0787965fa-1562273.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/28/c6/ef27f2cc88f1547e76713b511769-1582587.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/e3/a9/f3a8fcf9e4a035a62b61220f0caa-1580605.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/c4/d3/cb226cd5f16856c80b3b420662d6-1564673.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/fd/4f/a4f4e213733ee862dddde0e304ae-1567069.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/f6/f4/915de7b15e952debbe9c19820ea0-1501189.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/52/8c/3bd7c22b3a5abe40f7debd9f372d-1520109.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/14/56/0972fdb3bd49ee632fedb84b3845-1500663.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/1e/94/07153b8def3a698615d5572e8099-1494609.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/b2/e7/87d10becc8ca4d2f2820b118f81b-1472239.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="https://c.wallhere.com/images/35/f0/9105a2d77953e546cb3cc4b42639-1446815.jpg!s" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </main>
 
-<%include item_include/footer.ejs%>
+<script>
+    const cofirmDelete = (id) => {
+
+        const data = {id: id};
+        if (confirm("Xoa?") == true) {
+            fetch('http://localhost:3000/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(function (response) {
+                    if (response) {
+                        location.reload();
+                        return;
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+    //update
+    const updateImage = (id) => {
+        console.log(id);
+        localStorage.setItem("_id", id);
+    }
+</script>
+<% include item_include/footer.ejs %>
 
 </body>
 </html>

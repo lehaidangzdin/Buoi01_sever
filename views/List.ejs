@@ -50,6 +50,7 @@
 
         const data = { id: id };
         if (confirm("Xoa?") == true) {
+
             fetch('http://localhost:3000/delete', {
                 method: 'POST',
                 headers: {

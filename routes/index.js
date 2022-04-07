@@ -35,17 +35,6 @@ var upload = multer({
     }
 }).single("avatar");
 //
-// router.post('/DangKi', upload.array('photos', 12), function(
-//     req,
-//     res,
-//     next
-// ) {
-//     // req.files là một mảng của các file `photos`
-//     // req.body sẽ giữ thông tin gắn kèm (vd: text fields), nếu có
-// });
-
-
-//
 
 router.post('/DangKi', function (req, res, next) {
     upload(req, res, function (err) {
@@ -60,8 +49,14 @@ router.post('/DangKi', function (req, res, next) {
 });
 
 /* GET home page. */
+// router.get('/', function (req, res, next) {
+//     // res.render('index', {title: 'Home'});
+// });
+// home page
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Home'});
+    anh.find({}, function (err, data) {
+        res.render('index', {title: 'Home', data: data});
+    });// getall data
 });
 //
 router.get('/asia', function (req, res, next) {
@@ -199,6 +194,7 @@ router.post("/testForm", function (req, res) {
 var AnhLab05 = new mongoose.Schema({
     ten: "string",
     noiDung: "string",
+    ngayThang: "string",
     link: "string",
 });
 var anh = mongoose.model("AnhLab05", AnhLab05);
@@ -206,11 +202,13 @@ var anh = mongoose.model("AnhLab05", AnhLab05);
 router.post("/AddImage", function (req, res) {
     const ten = req.body.ten;
     const noiDung = req.body.noiDung;
+    const ngayThang = req.body.ngayThang;
     const link = req.body.linkAnh;
 
     const data = new anh({
         ten: ten,
         noiDung: noiDung,
+        ngayThang: ngayThang,
         link: link
     });
     var mess = "";
@@ -258,9 +256,10 @@ router.post('/UpdateImage', function (req, res, next) {
     let id = req.body._id;
     let ten = req.body.ten;
     let noiDung = req.body.noiDung;
+    let ngayThang = req.body.ngayThang;
     let link = req.body.linkAnh;
     //
-    anh.updateOne({_id: id}, {ten: ten, noiDung: noiDung, link: link}, function (err) {
+    anh.updateOne({_id: id}, {ten: ten, noiDung: noiDung,ngayThang:ngayThang, link: link}, function (err) {
         if (err == null) {
             res.render("Update", {title: "Update", message: "Update thanh cong!"});
 
@@ -272,23 +271,6 @@ router.post('/UpdateImage', function (req, res, next) {
 
 
 });
-// click button update
-// router.post("/Update",function (req,res,){
-//     let id = req.body.id;
-//     let ten = req.body.ten;
-//     let noiDung = req.body.noiDung;
-//     let link = req.body.linkAnh;
-//     anh.updateOne({_id:id},{ten:ten,noiDung:noiDung,link:link},function (err){
-//         if (err==null){
-//             res.render('Update', {title: 'Update', message: "Update thanh cong!"});
-//         }else {
-//             console.log(err.message);
-//             res.render('Update', {title: 'Update', message: "Update that bai!"});
-//         }
-//     })
-// })
-// xoa image
-// ================================delete image
 router.post("/delete", function (req, res) {
     let id = req.body.id;
     anh.deleteOne({_id: id}, function (err) {
